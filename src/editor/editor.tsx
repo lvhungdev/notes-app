@@ -1,27 +1,12 @@
-import { useCallback, useState } from 'react';
-import { BaseEditor, createEditor, DecoratedRange, NodeEntry, Text } from 'slate';
-import { Editable, ReactEditor, Slate, withReact } from 'slate-react';
+import { KeyboardEvent, useCallback, useState } from 'react';
+import { createEditor, DecoratedRange, Descendant, NodeEntry, Text } from 'slate';
+import { Editable, Slate, withReact } from 'slate-react';
 import { renderLeaf } from './leaves';
 import { parseMarkdown } from './markdown';
 
-export type LeafHeadingType = { type: 'heading'; depth: 1 | 2 | 3; text: string };
-export type LeafTextType = { type: 'text'; strong?: boolean; em?: boolean; text: string };
-export type LeafCodespanType = { type: 'codespan'; text: string };
-
-export type AppText = LeafHeadingType | LeafTextType | LeafCodespanType;
-
-export type AppElement = { children: AppText[] };
-
-declare module 'slate' {
-  interface CustomTypes {
-    Editor: BaseEditor & ReactEditor;
-    Element: AppElement;
-    Text: AppText;
-  }
-}
-
-const AppEditor = () => {
+const AppEditor = (props: AppEditorProps) => {
   const [editor] = useState(() => withReact(createEditor()));
+  const [content, setContent] = useState<Array<Descendant>>(props.initialValue);
 
   const renderLeafHook = useCallback(renderLeaf, []);
 
@@ -35,13 +20,27 @@ const AppEditor = () => {
     return parseMarkdown(node.text, path);
   }, []);
 
+  const handleEditorChange = (value: Array<Descendant>) => {
+    const isAstChange = editor.operations.some((op) => 'set_selection' !== op.type);
+    if (isAstChange) {
+      setContent(value);
+    }
+  };
+
+  const handleEditorKeyDown = (event: KeyboardEvent) => {
+    if (event.ctrlKey && event.key === 's') {
+      props.onChange?.(content);
+    }
+  };
+
   return (
     <div className="flex h-full justify-center">
-      <Slate editor={editor} initialValue={[{ children: [{ type: 'text', text: '' }] }]}>
+      <Slate editor={editor} initialValue={props.initialValue} onChange={handleEditorChange}>
         <Editable
           className="h-full w-full max-w-[800px] outline-none"
           renderLeaf={renderLeafHook}
           decorate={decorateHook}
+          onKeyDown={handleEditorKeyDown}
         />
       </Slate>
     </div>
@@ -49,3 +48,8 @@ const AppEditor = () => {
 };
 
 export default AppEditor;
+
+export type AppEditorProps = {
+  initialValue: Array<Descendant>;
+  onChange?: (value: Array<Descendant>) => void;
+};

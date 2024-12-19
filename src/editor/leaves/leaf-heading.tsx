@@ -1,5 +1,5 @@
 import { RenderLeafProps } from 'slate-react';
-import { LeafHeadingType } from '../editor';
+import { LeafHeadingType } from '../types';
 
 const LeafHeading = (props: LeafHeadingProps) => {
   const getFontSize = () => {
