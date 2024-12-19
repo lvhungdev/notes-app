@@ -1,5 +1,5 @@
 import { RenderLeafProps } from 'slate-react';
-import { LeafTextType } from '../types';
+import { LeafTextType } from '../editor';
 
 const LeafText = (props: LeafTextProps) => {
   return (

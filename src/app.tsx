@@ -1,5 +1,5 @@
 import { createRoot } from 'react-dom/client';
-import AppEditor from './editor/editor';
+import { AppEditor } from './editor';
 
 const App = () => {
   return (

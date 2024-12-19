@@ -1,5 +1,5 @@
 import { RenderLeafProps } from 'slate-react';
-import { LeafCodespanType } from '../types';
+import { LeafCodespanType } from '../editor';
 
 const LeafCodespan = (props: LeafCodespanProps) => {
   return (
