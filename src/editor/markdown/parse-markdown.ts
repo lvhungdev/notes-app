@@ -37,7 +37,13 @@ const parseInlineTokens = (tokens: Array<Token>, path: Path, offset: number) => 
   const ranges: Array<unknown> = [];
 
   for (const token of tokens) {
-    if (token.type !== 'text') {
+    if (token?.type === 'codespan') {
+      ranges.push({
+        type: 'codespan',
+        anchor: { path, offset: offset },
+        focus: { path, offset: offset + token.raw.length },
+      });
+    } else if (token.type !== 'text') {
       ranges.push({
         [token.type]: true,
         anchor: { path, offset: offset },
