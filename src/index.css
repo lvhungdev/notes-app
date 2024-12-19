@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    body {
+        @apply text-primary;
+        @apply bg-secondary;
+    }
+}
+
+@font-face {
+    font-family: 'BearSansUI';
+    src: url('../static/fonts/BearSansUI-Regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BearSansUI';
+    src: url('../static/fonts/BearSansUI-Italic.otf') format('opentype');
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'BearSansUI';
+    src: url('../static/fonts/BearSansUI-Medium.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BearSansUI';
+    src: url('../static/fonts/BearSansUI-MediumItalic.otf') format('opentype');
+    font-weight: 500;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'BearSansUI';
+    src: url('../static/fonts/BearSansUI-Bold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BearSansUI';
+    src: url('../static/fonts/BearSansUI-BoldItalic.otf') format('opentype');
+    font-weight: 700;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'BearSansUIHeading';
+    src: url('../static/fonts/BearSansUIHeading-Regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BearSansUIHeading';
+    src: url('../static/fonts/BearSansUIHeading-RegularItalic.otf') format('opentype');
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'BearSansUIHeading';
+    src: url('../static/fonts/BearSansUIHeading-Bold.otf') format('opentype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'BearSansUIHeading';
+    src: url('../static/fonts/BearSansUIHeading-Bolditalic.otf') format('opentype');
+    font-weight: 700;
+    font-style: italic;
+}
