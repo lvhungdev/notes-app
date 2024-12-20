@@ -71,5 +71,7 @@ const readDirRecursive = (dirPath: string): Array<DirInfo> => {
     }
   }
 
+  items.sort((a, b) => a.type.localeCompare(b.type));
+
   return items;
 };

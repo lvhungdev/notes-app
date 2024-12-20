@@ -13,7 +13,6 @@ const SideBar = (props: SideBarProps) => {
         return;
       }
 
-      result.items.sort((a, b) => a.type.localeCompare(b.type));
       setDirInfos(result.items);
     });
   }, []);
@@ -31,7 +30,7 @@ const SideBar = (props: SideBarProps) => {
     }
   };
 
-  return <div className="h-screen w-[512px] border-l border-l-gray-300">{dirInfos.map((m) => renderItem(m))}</div>;
+  return <div className="h-screen w-[512px] border-l border-l-gray-300 p-2">{dirInfos.map((m) => renderItem(m))}</div>;
 };
 
 export default SideBar;

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ChevronDownIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
+import { ChevronDownIcon, ChevronRightIcon } from '@heroicons/react/16/solid';
 import { DirInfoType, SideBarInfoType } from './side-bar';
 import SideBarFile from './side-bar-file';
 
@@ -15,13 +15,18 @@ const SideBarDir = (props: SideBarFileProps) => {
   };
 
   return (
-    <div>
-      <div className="flex cursor-pointer rounded-sm p-1 hover:bg-gray-200" onClick={() => setIsOpen(!isOpen)}>
-        {isOpen ? <ChevronDownIcon className="size-6" /> : <ChevronRightIcon className="size-6" />}
+    <>
+      <div
+        className="flex cursor-pointer items-center rounded p-1 hover:bg-gray-200"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        {isOpen ? <ChevronDownIcon className="-ml-2 size-5" /> : <ChevronRightIcon className="-ml-2 size-5" />}
         {props.path.split('/').at(-1)}
       </div>
-      {isOpen ? <div className="mr-2">{props.items.map((m) => renderItem(m))}</div> : null}
-    </div>
+      {isOpen ? (
+        <div className="ml-1.5 border-l border-l-gray-300 pl-2">{props.items.map((m) => renderItem(m))}</div>
+      ) : null}
+    </>
   );
 };
 
