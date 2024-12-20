@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import SideBarFile from './side-bar-file';
 import SideBarDir from './side-bar-dir';
+import SideBarTool from './side-bar-tool';
 
 const SideBar = (props: SideBarProps) => {
   const [dirInfos, setDirInfos] = useState<Array<SideBarInfoType>>([]);
@@ -30,7 +31,16 @@ const SideBar = (props: SideBarProps) => {
     }
   };
 
-  return <div className="h-screen w-[512px] border-l border-l-gray-300 p-2">{dirInfos.map((m) => renderItem(m))}</div>;
+  return (
+    <div className="h-screen w-96 overflow-auto border-l border-l-gray-300 p-2 pt-0">
+      <div className="sticky top-0 bg-secondary">
+        <SideBarTool />
+      </div>
+      {dirInfos.map((m, i) => (
+        <div key={i}>{renderItem(m)}</div>
+      ))}
+    </div>
+  );
 };
 
 export default SideBar;

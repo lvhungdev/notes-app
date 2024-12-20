@@ -24,7 +24,11 @@ const SideBarDir = (props: SideBarFileProps) => {
         {props.path.split('/').at(-1)}
       </div>
       {isOpen ? (
-        <div className="ml-1.5 border-l border-l-gray-300 pl-2">{props.items.map((m) => renderItem(m))}</div>
+        <div className="ml-1.5 border-l border-l-gray-300 pl-2">
+          {props.items.map((m, i) => (
+            <div key={i}>{renderItem(m)}</div>
+          ))}
+        </div>
       ) : null}
     </>
   );

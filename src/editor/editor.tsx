@@ -37,7 +37,7 @@ const AppEditor = (props: AppEditorProps) => {
     <div className="flex h-full justify-center">
       <Slate editor={editor} initialValue={props.initialValue} onChange={handleEditorChange}>
         <Editable
-          className="h-full w-full max-w-[800px] outline-none"
+          className="w-full max-w-[800px] outline-none"
           renderLeaf={renderLeafHook}
           decorate={decorateHook}
           onKeyDown={handleEditorKeyDown}
