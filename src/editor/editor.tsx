@@ -29,7 +29,7 @@ const AppEditor = (props: AppEditorProps) => {
 
   const handleEditorKeyDown = (event: KeyboardEvent) => {
     if (event.ctrlKey && event.key === 's') {
-      props.onChange?.(content);
+      props.onSave?.(content);
     }
   };
 
@@ -51,5 +51,5 @@ export default AppEditor;
 
 export type AppEditorProps = {
   initialValue: Array<Descendant>;
-  onChange?: (value: Array<Descendant>) => void;
+  onSave?: (value: Array<Descendant>) => void;
 };

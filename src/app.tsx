@@ -1,40 +1,42 @@
+import { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { AppEditor, AppElement } from './editor';
-import { useEffect, useState } from 'react';
+import { SideBar } from './side-bar';
 
 const App = () => {
   const [value, setValue] = useState<Array<AppElement>>([{ children: [{ type: 'text', text: '' }] }]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [filePath, setFilePath] = useState<string | undefined>();
 
   useEffect(() => {
-    window.file.read('note.json').then((result) => {
+    if (!filePath) return;
+
+    setIsLoading(true);
+    window.file.read(filePath).then((result) => {
       setIsLoading(false);
-      if ('content' in result) {
-        setValue(JSON.parse(result.content));
+      if ('error' in result) {
+        console.error(result.error);
+        return;
       }
+
+      setValue(JSON.parse(result.content));
     });
-  }, []);
+  }, [filePath]);
 
   return (
-    <div className="h-screen p-10">
+    <div className="flex h-screen">
       {isLoading ? null : (
-        <AppEditor
-          initialValue={value}
-          onChange={(content) => window.file.write('note.json', JSON.stringify(content))}
-        />
+        <div className="w-full p-8">
+          <AppEditor
+            initialValue={value}
+            onSave={(content) => window.file.write(filePath, JSON.stringify(content))}
+          />
+        </div>
       )}
+      <SideBar onFileSelect={(path) => setFilePath(path)} />
     </div>
   );
 };
 
 const root = createRoot(document.body);
 root.render(<App />);
-
-declare global {
-  interface Window {
-    file: {
-      write: (filePath: string, content: string) => Promise<{ error?: string }>;
-      read: (filePath: string) => Promise<{ content: string } | { error: string }>;
-    };
-  }
-}

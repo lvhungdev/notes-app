@@ -51,6 +51,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@heroicons/react": "^2.2.0",
     "electron-squirrel-startup": "^1.0.1",
     "marked": "^15.0.4",
     "react": "^19.0.0",
